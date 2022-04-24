@@ -2,6 +2,16 @@
     Random between rock, paper, and scissor
     Store the choice
 */
+let computerSelection = function() {
+    choice = Math.floor(Math.random() * 3);
+    if(choice === 0) {
+        return "rock";
+    } else if (choice === 1) {
+        return "scissor";
+    } else {
+        return "paper";
+    }
+}
 /* Problem 2 Player Selection
     Allow the player to type in one of the three
     Make sure it is case insensitive
