@@ -16,6 +16,10 @@ let computerSelection = function() {
     Allow the player to type in one of the three
     Make sure it is case insensitive
 */
+let playerSelection = function() {
+    selection = prompt("Rock, Paper, Scissor!").toLowerCase();
+    return selection;
+}
 /* Problem 3 Rock Paper Scissor
     Function with two parameters that takes in player and computer selection
     Should solve which one wins 
