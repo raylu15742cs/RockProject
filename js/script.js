@@ -19,8 +19,7 @@ let computerSelection = function() {
     Allow the player to type in one of the three
     Make sure it is case insensitive
 */
-let playerSelection = function() {
-    selection = prompt("Rock, Paper, Scissor!").toLowerCase();
+let playerSelection = function(selection) {
     let computerPLay = computerSelection();
     playRound(selection,computerPLay);
 }
@@ -29,63 +28,83 @@ let playerSelection = function() {
     Should solve which one wins 
     Return the result of which one wins
 */
+const scoreupdate = document.querySelector('p');
 let playRound =function(playerSelection, computerSelection) {
-    switch (playerSelection) {
-        case "rock":
-            if (computerSelection === "rock") {
-                console.log(`Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`);
-            } else if (computerSelection === "scissor") {
-                human += 1;
-                score= [human, robot];
-                console.log(`Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`);
-            } else {
-                robot += 1;
-                score= [human, robot];
-                console.log(`Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`);
-            }
-            break
-        case "paper":
-            if (computerSelection === "paper") {
-                console.log(`Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`);
-            } else if (computerSelection === "rock") {
-                human += 1;
-                score= [human, robot];
-                console.log(`Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`);
-            } else {
-                robot += 1;
-                score= [human, robot];
-                console.log(`Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`);
-            }
-            break
-        case "scissor":
-            if (computerSelection === "scissor") {
-                console.log(`Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`);
-            } else if (computerSelection === "paper") {
-                human += 1;
-                score= [human, robot];
-                console.log(`Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`);
-            } else {
-                robot += 1;
-                score= [human, robot];
-                console.log(`Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`);
-            }
+    if (human === 5 || robot === 5) {
+    } else {
+        switch (playerSelection) {
+            case "rock":
+                if (computerSelection === "rock") {
+                    scoreupdate.textContent = `Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`;
+                } else if (computerSelection === "scissor") {
+                    human += 1;
+                    score= [human, robot];
+                    scoreupdate.textContent = `Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`;
+                } else {
+                    robot += 1;
+                    score= [human, robot];
+                    scoreupdate.textContent = `Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`;
+                }
+                if (human == 5) {
+                    scoreupdate.innerText = `You win ${score}`;
+                }
+                if (robot == 5) {
+                    scoreupdate.innerText = `You lose ${score}`;
+                }
+                break
+            case "paper":
+                if (computerSelection === "paper") {
+                    scoreupdate.innerText = `Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`;
+                } else if (computerSelection === "rock") {
+                    human += 1;
+                    score= [human, robot];
+                    scoreupdate.innerText = `Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`;
+                } else {
+                    robot += 1;
+                    score= [human, robot];
+                    scoreupdate.innerText = `Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`;
+                }
+                if (human == 5) {
+                    scoreupdate.innerText = `You win ${score}`;
+                }
+                if (robot == 5) {
+                    scoreupdate.innerText = `You lose ${score}`;
+                }
+                break
+            case "scissor":
+                if (computerSelection === "scissor") {
+                    scoreupdate.innerText = `Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`;
+                } else if (computerSelection === "paper") {
+                    human += 1;
+                    score= [human, robot];
+                    scoreupdate.innerText = `Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`;
+                } else {
+                    robot += 1;
+                    score= [human, robot];
+                    scoreupdate.innerText = `Result : tie ${score} You picked ${playerSelection}. Robot picked ${computerSelection}`;
+                }
+                if (human == 5) {
+                    scoreupdate.innerText = `You win ${score}`;
+                }
+                if (robot == 5) {
+                    scoreupdate.innerText = `You lose ${score}`;
+                }
 
-            break
-  }
+                break
+            }
+    }
 }
 /* Problem 4 Counter
     Make it a best of 5 competition
     Make sure the result of each match is tracked
     Stop the program after one reach 5
 */
-while (human != 5) {
-    if (robot != 5){
-        playerSelection();
-    }
-}
-if (human == 5) {
-    console.log (`You win ${score}`)
-}
-if (robot == 5) {
-    console.log (`You lose ${score}`)
+let allbut = document.querySelectorAll('button');
+allbut.forEach(button => button.addEventListener('click', function(e){
+    playerSelection(e.target.className);
+} ))
+function reset(){
+    human = 0;
+    robot = 0;
+    scoreupdate.innerText = 'Score: 0 , 0';
 }
